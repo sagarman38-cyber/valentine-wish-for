@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Beautiful Wife</title>
+    <style>
+        body {
+            background-color: #fff0f3;
+            font-family: 'Poppins', 'Arial', sans-serif;
+            text-align: center;
+            color: #c9184a;
+            margin: 0;
+            padding: 0;
+            transition: background 0.5s;
+        }
+        #proposal-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #main-content { display: none; padding: 40px 20px; }
+        
+        .btn {
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        #yesBtn { background-color: #ff4d6d; color: white; margin-right: 10px; }
+        #noBtn { background-color: #808080; color: white; position: absolute; }
+        
+        .poem-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            max-width: 500px;
+            margin: 20px auto;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #poem-text { font-size: 1.4rem; line-height: 1.6; color: #590d22; font-style: italic; }
+        
+        #photo-display {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .next-btn { background-color: #ff758f; color: white; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="proposal-section">
+        <h1>Will you be my Valentine? ❤️</h1>
+        <div style="position: relative; width: 100%; height: 100px;">
+            <button id="yesBtn" class="btn" onclick="startSurprise()">Yes, Forever!</button>
+            <button id="noBtn" class="btn" onmouseover="dodge()">No</button>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <h2 id="title">Happy Valentine's Day, My Love!</h2>
+        
+        <img id="photo-display" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=500" alt="Love">
+
+        <div class="poem-container">
+            <p id="poem-text">मुटुको धड्कन तिमी, मेरो संसार हौ तिमी।</p>
+        </div>
+
+        <button class="btn next-btn" onclick="nextPoem()">Click for More Love ✨</button>
+        
+        <audio id="bgMusic" loop>
+            <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        const poems = [
+            { t: "तिमी मेरो जीवनको उज्यालो हौ, तिमी बिना मेरो संसार अँध्यारो छ।", img: "https://images.unsplash.com/photo-1516589174184-c68526674fd6?q=80&w=500" },
+            { t: "In your smile, I see something more beautiful than the stars.", img: "https://images.unsplash.com/photo-1494972308805-463bc619b34e?q=80&w=500" },
+            { t: "हरेक जुनी तिम्रो साथ पाइयोस्, यो प्रेम सधैं अमर रहिरहोस्।", img: "https://images.unsplash.com/photo-1522673607200-1648832cee98?q=80&w=500" },
+            { t: "Every love story is beautiful, but ours is my favorite.", img: "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?q=80&w=500" },
+            { t: "मेरो खुशी तिम्रो हाँसोमा छ, मेरो संसार तिम्रो अंगालोमा छ।", img: "https://images.unsplash.com/photo-1511275539165-cc46b1ee8960?q=80&w=500" },
+            { t: "You are the best thing that ever happened to me.", img: "https://images.unsplash.com/photo-1474552226712-ac0f0961a954?q=80&w=500" }
+        ];
+
+        let currentId = 0;
+
+        function dodge() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function startSurprise() {
+            document.getElementById('proposal-section').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('bgMusic').play();
+        }
+
+        function nextPoem() {
+            currentId = (currentId + 1) % poems.length;
+            document.getElementById('poem-text').innerText = poems[currentId].t;
+            document.getElementById('photo-display').src = poems[currentId].img;
+            
+            // Subtle color change on each click
+            const colors = ['#fff0f3', '#fce1e4', '#f8edeb', '#fae1dd'];
+            document.body.style.backgroundColor = colors[currentId % colors.length];
+        }
+    </script>
+</body>
+</html>
